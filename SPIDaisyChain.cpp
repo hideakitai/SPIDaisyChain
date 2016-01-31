@@ -41,7 +41,8 @@ byte* SPIDaisyChain::transferDaisyChain(byte* chainedValue)
 	(this->*fallCS)();
 	for (int i=0; i<_nDaisyChains; i++)	readBytes[i] = transfer(chainedValue[i]);
 	(this->*riseCS)();
-	return readBytes;
+
+	return (byte*)readBytes;
 }
 
 int	 SPIDaisyChain::getDaisyChainNum()
@@ -68,5 +69,3 @@ inline void SPIDaisyChain::riseCSPORTB()
 {
 	PORTB |= _BV(_pinCS);
 }
-
-

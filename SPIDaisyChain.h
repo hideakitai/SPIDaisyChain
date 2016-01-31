@@ -10,8 +10,8 @@ class SPIDaisyChain : public SPIClass
 {
 public:
 
-	// chain id = 0 : farthest
-	// chain id = n : nearest
+	// chain id = 0 : the farthest motor
+	// chain id = n : the nearest motor
 	SPIDaisyChain(const int pinCS = 10, const int nDaisyChains = 1);
 	~SPIDaisyChain();
 
@@ -37,8 +37,3 @@ private:
 };
 
 #endif
-
-
-
-
-
