@@ -1,9 +1,12 @@
 #include "SPI.h"
 #include "SPIDaisyChain.h"
 
-SPIDaisyChain spi(10, 2);	// CS pin, chained number
+const uint8_t PIN_CS = 10;
+const uint8_t NUM_DEVICE = 3;
+SPIDaisyChain spi(PIN_CS, NUM_DEVICE);	// CS pin, chained number
 
-byte data[2] = {1, 2};
+byte send_data[NUM_DEVICE] = {1, 2, 3};
+byte recv_data[NUM_DEVICE] = {0, 0, 0};
 
 void setup()
 {
@@ -11,6 +14,12 @@ void setup()
 
 void loop()
 {
-	// send data[0] to far device, data[1] to near device
-	spi.transferDaisyChain(data);
+    // send data[0] to far device, data[1] to near device
+    recv_data = spi.transferDaisyChain(data);
+
+    for (uint8_t i = 0; i < NUM_DEVICE; ++i)
+    {
+        Serial.print(recv_data[i], HEX); Serial.print(" ");
+    }
+    Serial.println();
 }
